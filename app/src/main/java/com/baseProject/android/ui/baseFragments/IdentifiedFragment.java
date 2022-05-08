@@ -1,8 +1,8 @@
 package com.baseProject.android.ui.baseFragments;
 
 
-import static com.baseProject.android.ui.userAccount.userAutentication.AuthenticationState.AUTHENTICATED;
-import static com.baseProject.android.ui.userAccount.userAutentication.AuthenticationState.UNAUTHENTICATED;
+import static com.baseProject.android.util.userAutentication.AuthenticationState.AUTHENTICATED;
+import static com.baseProject.android.util.userAutentication.AuthenticationState.UNAUTHENTICATED;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.baseProject.android.data.DataWrapper;
 import com.baseProject.android.data.publicModel.exception.TokenNotVerifiedException;
 import com.baseProject.android.data.remote.authenticator.TokenManager;
 import com.baseProject.android.ui.login.activity.LoginActivity;
-import com.baseProject.android.ui.userAccount.userAutentication.UserAuthenticationViewModel;
+import com.baseProject.android.util.userAutentication.UserAuthenticationViewModel;
 
 /**
  * A simple {@link Fragment} subclass.

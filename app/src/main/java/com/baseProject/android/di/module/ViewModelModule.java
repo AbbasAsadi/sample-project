@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.baseProject.android.di.ViewModelKey;
 import com.baseProject.android.factory.ViewModelFactory;
-import com.baseProject.android.ui.SharedViewModel;
-import com.baseProject.android.ui.main.MainActivityViewModel;
-import com.baseProject.android.ui.userAccount.userAutentication.UserAuthenticationViewModel;
+import com.baseProject.android.ui.login.fragments.login.LoginViewModel;
+import com.baseProject.android.ui.login.fragments.signup.SignupViewModel;
+import com.baseProject.android.util.userAutentication.UserAuthenticationViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -31,17 +31,17 @@ public abstract class ViewModelModule {
      */
     @Binds
     @IntoMap
-    @ViewModelKey(MainActivityViewModel.class)
-    protected abstract ViewModel mainActivityViewModel(MainActivityViewModel mainActivityViewModel);
-
-    @Binds
-    @IntoMap
     @ViewModelKey(UserAuthenticationViewModel.class)
     protected abstract ViewModel userAuthenticationViewModel(UserAuthenticationViewModel userAuthenticationViewModel);
 
     @Binds
     @IntoMap
-    @ViewModelKey(SharedViewModel.class)
-    protected abstract ViewModel sharedViewModel(SharedViewModel sharedViewModel);
+    @ViewModelKey(LoginViewModel.class)
+    protected abstract ViewModel loginViewModel(LoginViewModel loginViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SignupViewModel.class)
+    protected abstract ViewModel signupViewModel(SignupViewModel signupViewModel);
 
 }

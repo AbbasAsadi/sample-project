@@ -14,7 +14,7 @@ class LoginViewModel @Inject internal constructor(private val repository: LoginR
     ParentViewModel() {
     val response = MutableLiveData<DataWrapper<LoginResponse>>()
 
-    fun loginRequest(body: LoginRequest) {
+    fun login(body: LoginRequest) {
         if (InternetUtil.isInternetOn()) {
             loading.set(true)
             addToUnsubscribed(repository.login(body)

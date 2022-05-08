@@ -7,7 +7,6 @@ import com.baseProject.android.di.module.ActivityModule;
 import com.baseProject.android.di.module.ApiModule;
 import com.baseProject.android.di.module.FragmentModule;
 import com.baseProject.android.di.module.PicassoModule;
-import com.baseProject.android.di.module.ServiceModule;
 import com.baseProject.android.di.module.ViewModelModule;
 
 import javax.inject.Singleton;
@@ -32,7 +31,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
         ViewModelModule.class,
         ActivityModule.class,
         PicassoModule.class,
-        ServiceModule.class,
         AndroidSupportInjectionModule.class,
         FragmentModule.class
 })

@@ -1,9 +1,7 @@
-package com.example.asanisminstitueproject.util.locale;
+package com.baseProject.android.util.locale;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import java.util.Locale;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -15,9 +13,6 @@ public abstract class LocaleAwareCompatActivity extends DaggerAppCompatActivity 
 
     //private LocaleUtilActivityDelegateImpl localeDelegate = new LocaleUtilActivityDelegateImpl();
 
-    public LocaleAwareCompatActivity() {
-        LocaleUtils2.updateConfiguration(this);
-    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -45,14 +40,6 @@ public abstract class LocaleAwareCompatActivity extends DaggerAppCompatActivity 
     protected void onPause() {
         super.onPause();
 //        localeDelegate.onPaused();
-    }
-
-    public void updateLocale(Locale locale) {
-
-        //localeDelegate.setLocale(this, locale);
-
-        LocaleUtils2.setLocale(this, locale);
-        recreate();
     }
 
 }

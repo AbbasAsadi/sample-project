@@ -16,7 +16,7 @@ public class UnknownException extends CustomRuntimeException {
 
     @Override
     public int getLabel() {
-        return R.string.exception_unknown;
+        return R.string.unknown_error;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.asanisminstitueproject.util.locale;
+package com.baseProject.android.util.locale;
 
 import android.app.Application;
 import android.content.Context;

@@ -4,7 +4,6 @@ import static com.baseProject.android.data.remote.api.ServerAddresses.BASE_URL;
 
 import android.app.Application;
 
-import com.baseProject.android.data.publicModel.wrapper.UtcISODate;
 import com.baseProject.android.data.remote.api.ApiService;
 import com.baseProject.android.data.remote.interceptor.ApiResponseInterceptor;
 import com.baseProject.android.data.remote.interceptor.RequestInterceptor;
@@ -46,7 +45,7 @@ public class ApiModule {
         return new GsonBuilder()
                 .setLenient()
                 .disableHtmlEscaping()
-                .setDateFormat(UtcISODate.DATE_FORMAT)
+//                .setDateFormat(UtcISODate.DATE_FORMAT)
                 //.registerTypeAdapter(UtcISODate.class , new GsonUTCDateAdapter())
                 //.registerTypeAdapter(Date.class, new GsonUTCDateAdapter())
 //                .registerTypeAdapter(Widget.class , new WidgetDeserializer())

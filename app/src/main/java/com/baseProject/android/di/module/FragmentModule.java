@@ -1,6 +1,8 @@
 package com.baseProject.android.di.module;
 
 import com.baseProject.android.ui.baseFragments.IdentifiedFragment;
+import com.baseProject.android.ui.login.fragments.login.LoginFragment;
+import com.baseProject.android.ui.login.fragments.signup.SignupFragment;
 import com.google.android.gms.common.ErrorDialogFragment;
 
 import dagger.Module;
@@ -20,10 +22,14 @@ public abstract class FragmentModule {
     @ContributesAndroidInjector
     abstract IdentifiedFragment contributesIdentifiedFragment();
 
-//    @ContributesAndroidInjector
-//    abstract MainFragment contributesMainFragment();
-
     @ContributesAndroidInjector
     abstract ErrorDialogFragment contributesErrorDialogFragment();
+
+    @ContributesAndroidInjector
+    abstract LoginFragment contributesLoginFragment();
+
+    @ContributesAndroidInjector
+    abstract SignupFragment contributesSignupFragment();
+
 
 }

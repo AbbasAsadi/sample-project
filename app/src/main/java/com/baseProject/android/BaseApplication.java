@@ -5,7 +5,7 @@ import android.content.Context;
 import com.baseProject.android.di.component.DaggerAppComponent;
 import com.baseProject.android.util.InternetUtil;
 import com.baseProject.android.util.MessageUtil;
-import com.example.asanisminstitueproject.util.locale.LocaleAwareApplication;
+import com.baseProject.android.util.locale.LocaleAwareApplication;
 import com.orhanobut.hawk.Hawk;
 
 import javax.inject.Inject;
