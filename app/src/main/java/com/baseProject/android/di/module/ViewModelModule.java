@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.baseProject.android.di.ViewModelKey;
 import com.baseProject.android.factory.ViewModelFactory;
+import com.baseProject.android.ui.chat.ChatViewModel;
 import com.baseProject.android.ui.login.fragments.login.LoginViewModel;
 import com.baseProject.android.ui.login.fragments.signup.SignupViewModel;
 import com.baseProject.android.util.userAutentication.UserAuthenticationViewModel;
@@ -43,5 +44,10 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SignupViewModel.class)
     protected abstract ViewModel signupViewModel(SignupViewModel signupViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChatViewModel.class)
+    protected abstract ViewModel chatViewModel(ChatViewModel chatViewModel);
 
 }

@@ -1,39 +1,40 @@
 package com.baseProject.android.data.remote.model.responseModel.login
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class AuthItems(
-
-    @field:SerializedName("owner")
+    @Expose
+    @SerializedName("owner")
     val owner: Boolean? = null,
-
-    @field:SerializedName("timelapse_video")
+    @Expose
+    @SerializedName("timelapse_video")
     val timelapseVideo: Boolean? = null,
-
-    @field:SerializedName("coder")
+    @Expose
+    @SerializedName("coder")
     val coder: Boolean? = null,
-
-    @field:SerializedName("tracked_timer_month")
+    @Expose
+    @SerializedName("tracked_timer_month")
     val trackedTimerMonth: Boolean? = null,
-
-    @field:SerializedName("can_edit_time")
+    @Expose
+    @SerializedName("can_edit_time")
     val canEditTime: Boolean? = null,
-
-    @field:SerializedName("member_area")
+    @Expose
+    @SerializedName("member_area")
     val memberArea: Boolean? = null,
-
-    @field:SerializedName("screens_month")
+    @Expose
+    @SerializedName("screens_month")
     val screensMonth: Boolean? = null,
-
-    @field:SerializedName("chat")
+    @Expose
+    @SerializedName("chat")
     val chat: Boolean? = null,
-
-    @field:SerializedName("instant_screen")
+    @Expose
+    @SerializedName("instant_screen")
     val instantScreen: Boolean? = null,
-
-    @field:SerializedName("disc_space")
+    @Expose
+    @SerializedName("disc_space")
     val discSpace: Boolean? = null,
-
-    @field:SerializedName("trial")
+    @Expose
+    @SerializedName("trial")
     val trial: Boolean? = null
 )

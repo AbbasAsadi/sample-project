@@ -30,7 +30,7 @@ class SplashActivity : LocaleAwareCompatActivity() {
                     )
                 )
             },
-            3500
+            2000
         )
     }
 }

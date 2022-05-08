@@ -1,15 +1,16 @@
 package com.baseProject.android.data.remote.model.responseModel.login
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
-
-    @field:SerializedName("already_join_project")
+    @Expose
+    @SerializedName("already_join_project")
     val alreadyJoinProject: Any? = null,
-
-    @field:SerializedName("app_init")
+    @Expose
+    @SerializedName("app_init")
     val appInit: AppInit? = null,
-
-    @field:SerializedName("token")
+    @Expose
+    @SerializedName("token")
     val token: String? = null
 )

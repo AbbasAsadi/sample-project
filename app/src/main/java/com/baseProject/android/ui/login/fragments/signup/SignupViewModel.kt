@@ -3,6 +3,7 @@ package com.baseProject.android.ui.login.fragments.signup
 import androidx.lifecycle.MutableLiveData
 import com.baseProject.android.data.DataWrapper
 import com.baseProject.android.data.publicModel.exception.InternetConnectionException
+import com.baseProject.android.data.remote.authenticator.TokenManager
 import com.baseProject.android.data.remote.model.requestModel.signup.SignupRequest
 import com.baseProject.android.data.remote.model.responseModel.login.LoginResponse
 import com.baseProject.android.data.repository.login.LoginRepository
@@ -20,7 +21,9 @@ class SignupViewModel @Inject internal constructor(private val repository: Login
             addToUnsubscribed(repository.signup(body)
                 .subscribe({ dataWrapper ->
                     loading.set(false)
-                    response.postValue(dataWrapper as DataWrapper<LoginResponse>?)
+                    val data = dataWrapper as DataWrapper<LoginResponse>
+                    TokenManager.saveAccessToken(data.data!!.token)
+                    response.postValue(data)
                 }) { throwable ->
                     loading.set(false)
                     exceptionParser(response, throwable)

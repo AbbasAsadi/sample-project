@@ -77,6 +77,13 @@ public class HttpStatusCode {
         return false;
     }
 
+    public static boolean isHttp401Error(Throwable throwable) {
+        if (throwable instanceof HttpException) {
+            return ((HttpException) throwable).code() == BAD_TOKEN;
+        }
+        return false;
+    }
+
     public static boolean isHttpSuccessWithoutData(WrappedApiResponse response) {
         return response.statusCode == 204;
     }

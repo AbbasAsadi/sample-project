@@ -1,7 +1,7 @@
 package com.baseProject.android.data.remote.interceptor;
 
+import static com.baseProject.android.data.remote.util.HttpStatusCode.BAD_TOKEN;
 import static com.baseProject.android.data.remote.util.HttpStatusCode.TOKEN_NOT_ALLOWED;
-import static com.baseProject.android.data.remote.util.HttpStatusCode.USER_NOT_AUTHENTICATED;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -68,11 +68,12 @@ public class ApiResponseInterceptor implements Interceptor {
                 } else {
                     return response;
                 }
+            } else if (HttpStatusCode.isHttp401Error(response)) {
+//                userNotAuthenticated();
+                return response.newBuilder().code(BAD_TOKEN).body(ResponseBody.create(bodyString, JSON)).build();
             } else if (response.code() >= 400) {
                 JSONArray jsonArray = new JSONArray(bodyString);
                 wrappedResponseJson.put(WrappedApiResponse.WrappedApiResponseJSONKey.SERVER_ERROR, jsonArray);
-            } else if (HttpStatusCode.isHttp417Error(response)) {
-                return response.newBuilder().code(USER_NOT_AUTHENTICATED).body(ResponseBody.create(bodyString, JSON)).build();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -86,6 +87,7 @@ public class ApiResponseInterceptor implements Interceptor {
 
 
     private void userNotAuthenticated() {
+
     }
 
 

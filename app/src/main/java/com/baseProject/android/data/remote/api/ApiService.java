@@ -4,13 +4,16 @@ import com.baseProject.android.data.remote.model.requestModel.login.LoginRequest
 import com.baseProject.android.data.remote.model.requestModel.logout.LogoutRequest;
 import com.baseProject.android.data.remote.model.requestModel.signup.SignupRequest;
 import com.baseProject.android.data.remote.model.responseModel.WrappedApiResponse;
+import com.baseProject.android.data.remote.model.responseModel.chat.ChatListResponse;
 import com.baseProject.android.data.remote.model.responseModel.login.AppInit;
 import com.baseProject.android.data.remote.model.responseModel.login.LoginResponse;
+import com.baseProject.android.data.remote.model.responseModel.usersForeign.UsersForeignResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * The interface api service.
@@ -33,6 +36,9 @@ public interface ApiService {
 
     //-------------------------------------------- chat --------------------------------------------
     @GET("chat-channels")
-    Observable<WrappedApiResponse<LoginResponse>> channelList();
+    Observable<WrappedApiResponse<ChatListResponse>> channelList();
+
+    @GET("users/foreign")
+    Observable<WrappedApiResponse<UsersForeignResponse>> usersForeign(@Query("ids") String ids);
 
 }

@@ -29,12 +29,32 @@ public class ChatRepository {
                 .observeOn(Schedulers.io())
                 .flatMap(response -> {
                     if (HttpStatusCode.isHttpSuccessWithData(response)) {
-                        return Observable.just(DataWrapper.success(true));
+                        return Observable.just(DataWrapper.success(response.data));
                     } else {
                         return Observable.just(DataWrapper.serverError(response.errorCodes()));
                     }
                 }).onErrorResumeNext(t -> {
-                    if (HttpStatusCode.isHttp403Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
+                    if (HttpStatusCode.isHttp401Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
+                        return Observable.just(DataWrapper.error(null, new TokenNotVerifiedException(),
+                                MessageMap.getMessageWithThrowableException(Constants.NETWORK_EXCEPTION_CODE.FAILED_TO_CONNECT)));
+                    }
+                    return Observable.just(DataWrapper.error(null, t, ""));
+                });
+    }
+
+    public Observable<DataWrapper<?>> usersForeign(String ids) {
+        return mApiService.usersForeign(ids)
+                .subscribeOn(Schedulers.io())
+                .doOnError(Throwable::printStackTrace)
+                .observeOn(Schedulers.io())
+                .flatMap(response -> {
+                    if (HttpStatusCode.isHttpSuccessWithData(response)) {
+                        return Observable.just(DataWrapper.success(response.data));
+                    } else {
+                        return Observable.just(DataWrapper.serverError(response.errorCodes()));
+                    }
+                }).onErrorResumeNext(t -> {
+                    if (HttpStatusCode.isHttp401Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
                         return Observable.just(DataWrapper.error(null, new TokenNotVerifiedException(),
                                 MessageMap.getMessageWithThrowableException(Constants.NETWORK_EXCEPTION_CODE.FAILED_TO_CONNECT)));
                     }

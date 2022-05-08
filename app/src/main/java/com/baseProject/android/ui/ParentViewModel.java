@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.baseProject.android.data.DataWrapper;
-import com.baseProject.android.data.publicModel.exception.Http401Exception;
 import com.baseProject.android.data.publicModel.exception.InternalServerException;
 import com.baseProject.android.data.publicModel.exception.InternetConnectionException;
 import com.baseProject.android.data.publicModel.exception.TokenNotVerifiedException;
@@ -85,8 +84,6 @@ public class ParentViewModel extends ViewModel {
 
         switch (exception.code()) {
             case 401:
-                data.postValue(DataWrapper.error(null, new Http401Exception(), null));
-                break;
             case 403:
             case 417:
             case 407:

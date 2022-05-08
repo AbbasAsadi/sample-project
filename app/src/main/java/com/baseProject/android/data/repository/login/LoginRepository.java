@@ -32,12 +32,12 @@ public class LoginRepository {
                 .observeOn(Schedulers.io())
                 .flatMap(response -> {
                     if (HttpStatusCode.isHttpSuccessWithData(response)) {
-                        return Observable.just(DataWrapper.success(true));
+                        return Observable.just(DataWrapper.success(response.data));
                     } else {
                         return Observable.just(DataWrapper.serverError(response.errorCodes()));
                     }
                 }).onErrorResumeNext(t -> {
-                    if (HttpStatusCode.isHttp403Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
+                    if (HttpStatusCode.isHttp401Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
                         return Observable.just(DataWrapper.error(null, new TokenNotVerifiedException(),
                                 MessageMap.getMessageWithThrowableException(Constants.NETWORK_EXCEPTION_CODE.FAILED_TO_CONNECT)));
                     }
@@ -57,7 +57,7 @@ public class LoginRepository {
                         return Observable.just(DataWrapper.serverError(response.errorCodes()));
                     }
                 }).onErrorResumeNext(t -> {
-                    if (HttpStatusCode.isHttp403Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
+                    if (HttpStatusCode.isHttp401Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
                         return Observable.just(DataWrapper.error(null, new TokenNotVerifiedException(),
                                 MessageMap.getMessageWithThrowableException(Constants.NETWORK_EXCEPTION_CODE.FAILED_TO_CONNECT)));
                     }
@@ -77,7 +77,7 @@ public class LoginRepository {
                         return Observable.just(DataWrapper.serverError(response.errorCodes()));
                     }
                 }).onErrorResumeNext(t -> {
-                    if (HttpStatusCode.isHttp403Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
+                    if (HttpStatusCode.isHttp401Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
                         return Observable.just(DataWrapper.error(null, new TokenNotVerifiedException(),
                                 MessageMap.getMessageWithThrowableException(Constants.NETWORK_EXCEPTION_CODE.FAILED_TO_CONNECT)));
                     }
@@ -92,12 +92,12 @@ public class LoginRepository {
                 .observeOn(Schedulers.io())
                 .flatMap(response -> {
                     if (HttpStatusCode.isHttpSuccessWithData(response)) {
-                        return Observable.just(DataWrapper.success(response.data));
+                        return Observable.just(DataWrapper.success(true));
                     } else {
                         return Observable.just(DataWrapper.serverError(response.errorCodes()));
                     }
                 }).onErrorResumeNext(t -> {
-                    if (HttpStatusCode.isHttp403Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
+                    if (HttpStatusCode.isHttp401Error(t) /*|| HttpStatusCode.isHttp407Error(t)*/) {
                         return Observable.just(DataWrapper.error(null, new TokenNotVerifiedException(),
                                 MessageMap.getMessageWithThrowableException(Constants.NETWORK_EXCEPTION_CODE.FAILED_TO_CONNECT)));
                     }

@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class TokenManager {
 
-//    private final static String PERFIX = "Token ";
+    private final static String PERFIX = "Bearer ";
     /**
      * this if from (60 sec * 1000 millis)
      */
@@ -92,7 +92,7 @@ public class TokenManager {
      * @param accessToken the access token save access token in shared preferences
      */
     public static void saveAccessToken(String accessToken) {
-        Hawk.put(ACCESS_TOKEN, /*PERFIX + */accessToken);
+        Hawk.put(ACCESS_TOKEN, PERFIX + accessToken);
     }
 
     /**
@@ -102,7 +102,7 @@ public class TokenManager {
      * @param ttl          token time ti live, in minute
      */
     public static void saveAccessToken(String accessToken, Date creationTime, int ttl) {
-        Hawk.put(ACCESS_TOKEN, /*PERFIX + */accessToken);
+        Hawk.put(ACCESS_TOKEN, PERFIX + accessToken);
         Hawk.put(TOKEN_EXPIRATION_TIME, creationTime.getTime() + (ttl * MINUTE_TO_MILLIS));
     }
 
