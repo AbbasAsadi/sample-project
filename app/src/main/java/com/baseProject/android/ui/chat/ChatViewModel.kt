@@ -3,6 +3,8 @@ package com.baseProject.android.ui.chat
 import androidx.lifecycle.MutableLiveData
 import com.baseProject.android.data.DataWrapper
 import com.baseProject.android.data.publicModel.exception.InternetConnectionException
+import com.baseProject.android.data.remote.authenticator.TokenManager
+import com.baseProject.android.data.remote.model.requestModel.logout.LogoutRequest
 import com.baseProject.android.data.remote.model.responseModel.chat.ChatListResponse
 import com.baseProject.android.data.remote.model.responseModel.usersForeign.UsersForeignResponse
 import com.baseProject.android.data.repository.chat.ChatRepository
@@ -45,6 +47,19 @@ class ChatViewModel @Inject internal constructor(private val repository: ChatRep
                 })
         } else {
             exceptionParser(usersResponse, InternetConnectionException())
+        }
+    }
+
+    fun signOut() {
+        if (InternetUtil.isInternetOn()) {
+            loading.set(true)
+            addToUnsubscribed(repository.logout(LogoutRequest(true))
+                .subscribe({
+                    loading.set(false)
+                    TokenManager.clearToken()
+                }) {
+                    loading.set(false)
+                })
         }
     }
 }

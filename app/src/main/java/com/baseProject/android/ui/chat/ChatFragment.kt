@@ -1,12 +1,11 @@
 package com.baseProject.android.ui.chat
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.baseProject.android.R
 import com.baseProject.android.data.Status
 import com.baseProject.android.data.remote.model.responseModel.chat.ChannelsItem
 import com.baseProject.android.data.remote.model.responseModel.usersForeign.UsersItem
@@ -25,8 +24,10 @@ class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionList
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentChatBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ChatViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ChatViewModel::class.java]
         binding.loadingObservable = viewModel.loading
+        setHasOptionsMenu(true)
+        binding.toolbar.inflateMenu(R.menu.channel_menu)
 
         return binding.root
     }
@@ -37,6 +38,22 @@ class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionList
         subscribeGetUser()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.channel_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sign_out_menu_item -> {
+                viewModel.signOut()
+                redirectToLogin(requireContext())
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun subscribe() {
         viewModel.response.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -45,7 +62,7 @@ class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionList
                         binding.isChatListEmpty = it.data.channels.isEmpty()
                         if (it.data.channels.isNotEmpty()) {
                             var ids = ""
-                            val userID = PrefManager(requireContext()).userID
+                            val userID = PrefManager.getUserID()
                             for (item in it.data.channels) {
                                 if (userID != item?.idPartner)
                                     ids = ids + item?.idPartner.toString() + ","

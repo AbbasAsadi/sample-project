@@ -9,6 +9,7 @@ import com.baseProject.android.data.remote.model.responseModel.login.LoginRespon
 import com.baseProject.android.data.repository.login.LoginRepository
 import com.baseProject.android.ui.ParentViewModel
 import com.baseProject.android.util.InternetUtil
+import com.baseProject.android.util.PrefManager
 import javax.inject.Inject
 
 class SignupViewModel @Inject internal constructor(private val repository: LoginRepository) :
@@ -23,6 +24,7 @@ class SignupViewModel @Inject internal constructor(private val repository: Login
                     loading.set(false)
                     val data = dataWrapper as DataWrapper<LoginResponse>
                     TokenManager.saveAccessToken(data.data!!.token)
+                    PrefManager.setUserID(data.data.appInit?.user?.id!!)
                     response.postValue(data)
                 }) { throwable ->
                     loading.set(false)

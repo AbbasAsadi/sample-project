@@ -21,7 +21,6 @@ import com.baseProject.android.ui.baseFragments.BaseFragment
 import com.baseProject.android.ui.error.ErrorDialogFragment
 import com.baseProject.android.ui.main.MainActivity
 import com.baseProject.android.util.MessageMap
-import com.baseProject.android.util.PrefManager
 import com.baseProject.android.util.ValidateUtil
 
 
@@ -64,7 +63,6 @@ class LoginFragment : BaseFragment(), ErrorDialogFragment.OnErrorActionListener 
         viewModel.response.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    PrefManager(requireContext()).userID = it.data?.appInit?.user?.id!!
                     startActivity(Intent(requireActivity(), MainActivity::class.java))
                 }
                 Status.ERROR, Status.SERVER_ERROR -> {
