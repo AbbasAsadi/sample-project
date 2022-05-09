@@ -8,6 +8,9 @@ data class MessageLast(
     @SerializedName("dta_create")
     val dtaCreate: String? = null,
     @Expose
+    @SerializedName("dta_change_msg")
+    val dtaChangeMsg: String? = null,
+    @Expose
     @SerializedName("is_read")
     val isRead: Int? = null,
     @Expose

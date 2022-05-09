@@ -107,8 +107,7 @@ class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionList
     }
 
     private fun setupList(channels: List<ChannelsItem?>, users: List<UsersItem?>) {
-        val reversedList = channels.reversed()
-        val adapter = ChannelListAdapter(requireContext(), reversedList, users)
+        val adapter = ChannelListAdapter(requireContext(), channels, users)
         binding.chatRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.chatRecyclerView.adapter = adapter

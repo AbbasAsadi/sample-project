@@ -57,5 +57,7 @@ data class ChannelsItem(
     val id: Int? = null,
     @Expose
     @SerializedName("is_hide_in_chats_list")
-    val isHideInChatsList: Boolean? = null
+    val isHideInChatsList: Boolean? = null,
+
+    var isMoved: Boolean = false
 )

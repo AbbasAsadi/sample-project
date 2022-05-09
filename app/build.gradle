@@ -99,6 +99,9 @@ dependencies {
     //circular ImageView
     implementation 'com.mikhaellopez:circularimageview:4.3.0'
 
+    //textDrawable
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
     //custom font
     implementation 'io.github.inflationx:viewpump:2.0.3'
 }
