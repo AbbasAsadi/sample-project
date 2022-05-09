@@ -12,12 +12,19 @@ import com.baseProject.android.data.remote.model.responseModel.usersForeign.User
 import com.baseProject.android.databinding.FragmentChatBinding
 import com.baseProject.android.ui.baseFragments.IdentifiedFragment
 import com.baseProject.android.ui.error.ErrorDialogFragment
+import com.baseProject.android.ui.main.MainActivity
 import com.baseProject.android.util.MessageMap
 import com.baseProject.android.util.PrefManager
+
 
 class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionListener {
     private lateinit var viewModel: ChatViewModel
     private lateinit var binding: FragmentChatBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,10 +33,15 @@ class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionList
         binding = FragmentChatBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, viewModelFactory)[ChatViewModel::class.java]
         binding.loadingObservable = viewModel.loading
-        setHasOptionsMenu(true)
-        binding.toolbar.inflateMenu(R.menu.channel_menu)
+        setMenuForToolbar()
 
         return binding.root
+    }
+
+    private fun setMenuForToolbar() {
+        (activity as MainActivity?)!!.setSupportActionBar(binding.toolbar)
+        (activity as MainActivity?)!!.supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.toolbar.inflateMenu(R.menu.channel_menu)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,16 +71,7 @@ class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionList
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data?.channels != null) {
-                        binding.isChatListEmpty = it.data.channels.isEmpty()
-                        if (it.data.channels.isNotEmpty()) {
-                            var ids = ""
-                            val userID = PrefManager.getUserID()
-                            for (item in it.data.channels) {
-                                if (userID != item?.idPartner)
-                                    ids = ids + item?.idPartner.toString() + ","
-                            }
-                            viewModel.usersForeign(ids.removeRange(ids.length - 1, ids.length))
-                        }
+                        handleChannelSuccessResponse(it.data.channels)
                     }
                 }
                 Status.ERROR, Status.SERVER_ERROR -> {
@@ -82,6 +85,19 @@ class ChatFragment : IdentifiedFragment(), ErrorDialogFragment.OnErrorActionList
                 else -> true
             }
 
+        }
+    }
+
+    private fun handleChannelSuccessResponse(channels: List<ChannelsItem?>) {
+        binding.isChatListEmpty = channels.isEmpty()
+        if (channels.isNotEmpty()) {
+            var ids = ""
+            val userID = PrefManager.getUserID()
+            for (item in channels) {
+                if (userID != item?.idPartner)
+                    ids = ids + item?.idPartner.toString() + ","
+            }
+            viewModel.usersForeign(ids.removeRange(ids.length - 1, ids.length))
         }
     }
 
